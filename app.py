@@ -1,11 +1,14 @@
-from fastapi import FastAPI, HTTPException
-from fastapi.middleware.cors import CORSMiddleware
+from fastapi import FastAPI
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 import scraper
 
 app = FastAPI(title="DSR ScrapAssist V4")
-app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_credentials=True, allow_methods=["*"], allow_headers=["*"])
 
+# Montre le dossier frontend sur /app
+app.mount("/app", StaticFiles(directory="frontend", html=True), name="static")
+
+# API REST
 class SearchParams(BaseModel):
     commune: str
     rayon: int
@@ -16,7 +19,9 @@ class SearchParams(BaseModel):
 
 @app.post("/search")
 def search(data: SearchParams):
-    try:
-        return {"results": scraper.run(data.dict())}
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+    return {"results": scraper.run(data.dict())}
+
+# Redirection racine → /app
+@app.get("/")
+def root():
+    return {"redirect": "/app"}
