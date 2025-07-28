@@ -3,19 +3,17 @@ from bs4 import BeautifulSoup
 
 def run(params):
     commune = params.get("commune", "")
-    api_key = "a9cf2e30657a19fd8822c8142a216807ee45e20a"  # ta clé ZenRows
-    url = "https://www.aef.cci.fr/rechercheMulticritere"
-
+    api_key = "a9cf2e30657a19fd8822c8142a216807ee45e20a"
     zenrows_url = "https://api.zenrows.com/v1/"
-    params_zen = {
-        "url": url,
+    payload = {
+        "url": "https://www.aef.cci.fr/rechercheMulticritere",
         "apikey": api_key,
         "js_render": "true",
         "antibot": "true"
     }
 
     try:
-        r = requests.get(zenrows_url, params=params_zen, timeout=30)
+        r = requests.get(zenrows_url, params=payload, timeout=30)
         r.raise_for_status()
         soup = BeautifulSoup(r.text, "html.parser")
         rows = soup.select(".listeEntreprise tr")
@@ -29,6 +27,5 @@ def run(params):
                     "cp": tds[2].text.strip()
                 })
         return data
-    except Exception:
-        # fallback fictif
-        return [{"nom": "Entreprise Test", "ville": commune, "cp": "99999"}]
+    except Exception as e:
+        return [{"nom": f"Erreur : {e}", "ville": commune, "cp": "-"}]
