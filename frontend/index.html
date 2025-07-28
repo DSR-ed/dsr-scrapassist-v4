@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>DSR ScrapAssist V4</title>
+  <link rel="stylesheet" href="style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+<body>
+  <header>
+    <img src="https://raw.githubusercontent.com/DSR-ed/dsr-scrapassist-v4/main/logo.png" alt="Logo DSR" id="logo" />
+    <h2>Bienvenue sur l'application Professionnelle DSR ScrapAssist V4,<br>trouvez vos partenaires où que vous soyez en temps réel</h2>
+  </header>
+
+  <main>
+    <form id="searchForm">
+      <label>Commune ou Code postal <input id="commune" required></label>
+      <label>Rayon (km) <input type="number" id="rayon" min="1" value="5" required></label>
+      <label>Effectif
+        <select id="effectif">
+          <option>0 salarié</option><option>1 - 2 salariés</option><option>3 - 5 salariés</option><option>6 - 9 salariés</option><option>10 - 19 salariés</option><option>20 - 49 salariés</option><option>50 - 99 salariés</option><option>100 - 199 salariés</option><option>200 - 499 salariés</option><option>500 - 999 salariés</option><option>1000 - 1999 salariés</option><option>2000 - 4999 salariés</option><option>5000+ salariés</option><option>Effectif inconnu</option>
+        </select>
+      </label>
+      <label>Statut
+        <select id="statut">
+          <option>Siège social ou établissement principal</option>
+          <option>Établissement secondaire</option>
+        </select>
+      </label>
+      <label><input type="checkbox" id="telephone" checked> Avec téléphone</label>
+      <label><input type="checkbox" id="email" checked> Avec e-mail</label>
+      <button type="submit">Rechercher</button>
+    </form>
+
+    <section id="results" style="display:none">
+      <h3>Résultats (<span id="count"></span>)</h3>
+      <button onclick="exportCSV()">CSV</button>
+      <button onclick="exportPDF()">PDF</button>
+      <div id="cards"></div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
