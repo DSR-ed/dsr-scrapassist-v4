@@ -1,0 +1,8 @@
+body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f6f6f6; color: #333 }
+header { text-align: center; padding: 20px; background: #fff; box-shadow: 0 2px 4px rgba(0,0,0,.1) }
+#logo { height: 80px; margin-bottom: 10px }
+form { max-width: 400px; margin: 20px auto; display: flex; flex-direction: column; gap: 10px }
+button { padding: 10px; background: #005bbb; color: #fff; border: none; cursor: pointer }
+#cards { margin: 20px; display: grid; gap: 10px }
+.card { background: #fff; padding: 15px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,.1) }
+@media (prefers-color-scheme: dark) { body { background: #111; color: #eee } header, .card { background: #222 } }
